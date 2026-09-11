@@ -8,7 +8,7 @@
 void Game::InitBoidParticle(int size){
         for (size_t i = 0; i < size; i++) 
         {
-            boids.push_back({0, 0, 0, {(float)(GetRandomValue(0, 800)/800.0), (float)(GetRandomValue(0, 800)/800.0)}});
+            boids.push_back({0, 0, (float)(GetRandomValue(0, 800)/800.0), {(float)(GetRandomValue(0, 800)/800.0), (float)(GetRandomValue(0, 800)/800.0)}});
             std::cout << boids[i].Position[0] << ", " << boids[i].Position[0] << std::endl;
         }
 
@@ -21,7 +21,7 @@ int main(void)
 {
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
-    Shader FragShad = LoadShader(0, "Shaders/Frag.glsl");
+    Shader FragShad = LoadShader(0, "Shader/Frag.glsl");
 
     RenderTexture2D Screen = LoadRenderTexture(screenWidth, screenHeight);
 
