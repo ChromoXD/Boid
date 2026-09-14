@@ -4,8 +4,8 @@ in vec2 fragTexCoord;
 
 struct Boid {
     float Vision_Radius;
-    float Direction;
     float Velocity;
+    float Direction;
     float Position[2];
 };
 
@@ -25,12 +25,21 @@ float a = 0.1;
 
 void main(){
     FragColor = vec4(0.059, 0.055, 0.071, 1.0);
-
     vec2 localCord = fragTexCoord.xy/u_resolution;
 
     for(int i = 0; i < Number; i++){
         float x = fragTexCoord.x - Particle_Array[i].Position[0];
         float y = fragTexCoord.y - Particle_Array[i].Position[1];
+
+        if(( x*x + y*y < radius*radius) || 
+            (x*x + y*y < (Particle_Array[i].Vision_Radius*Particle_Array[i].Vision_Radius + 0.00001) && 
+             x*x + y*y > (Particle_Array[i].Vision_Radius*Particle_Array[i].Vision_Radius - 0.00001))){
+            FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+            break;
+        }
+    }
+
+}
 
 //        float theta = Particle_Array[i].Direction * 2 * PI;
 //
@@ -55,11 +64,3 @@ void main(){
 //            FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 //            break;
 //        }
-
-        if(x*x + y*y < radius*radius){
-            FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-            break;
-        }
-    }
-
-}
