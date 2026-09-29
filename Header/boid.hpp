@@ -11,8 +11,6 @@ class BoidParticleClass{
 
     public:
 
-        std::vector<std::array<int, 2>> Offsets;
-
         std::vector<Boid_Particles> boids{};
 
         BoidParticleClass(int NOP){
@@ -22,7 +20,8 @@ class BoidParticleClass{
     
     void InitBoidParticle(int NOP);
 
-    void AddForce(int index, float angle, float Newton);
+    // void AddForce(int index, float angle, float Newton);
+    void AddForce(int index, float angle, float Newton, float repulsive_Force, float repulsive_Force_Angle, float Stearing_Angle);
 
     int GetNumberOfParticles(){return this->NumberOfPaticles;}
 };

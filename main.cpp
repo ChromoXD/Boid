@@ -1,15 +1,14 @@
 #include <iostream>
+#include <bits/stdc++.h>
 #include "Header/main.hpp"
 #include "Header/boid.hpp"
 #include "raylib.h"
-#include <vector>
 #include <glad.h>
-#include <array>
 #include <cmath>
 #include <ctime>
 
-BoidParticleClass Boid(100);
-Game game(60);
+BoidParticleClass Boid(50);
+Game game(24);
 
 void Update();
 
@@ -23,33 +22,33 @@ int main(void)
     GLuint Boid_Position;
     glGenBuffers(1, &Boid_Position);
     glBindBuffer(
-        GL_SHADER_STORAGE_BUFFER, 
+        GL_SHADER_STORAGE_BUFFER,
         Boid_Position);
+    
     glBufferData(
-        GL_SHADER_STORAGE_BUFFER, 
-        Boid.boids.size() * sizeof(Boid.boids[0]), 
-        Boid.boids.data(), 
+        GL_SHADER_STORAGE_BUFFER,
+        Boid.boids.size() * sizeof(Boid.boids[0]),
+        Boid.boids.data(),
         GL_STATIC_DRAW);
+
     glBindBufferBase(
-        GL_SHADER_STORAGE_BUFFER, 
-        1, 
+        GL_SHADER_STORAGE_BUFFER,
+        1,
         Boid_Position);
 
-    int ResolutionLoc{GetShaderLocation(FragShad, "u_resolution")}, 
-        NumberLoc{GetShaderLocation(FragShad, "Number")}, 
-        res[2]{screenWidth, screenHeight}, 
+    int ResolutionLoc{GetShaderLocation(FragShad, "u_resolution")},
+        NumberLoc{GetShaderLocation(FragShad, "Number")},
+        res[2]{screenWidth, screenHeight},
         NOP{Boid.GetNumberOfParticles()};
 
     while (!WindowShouldClose())
     {
-
         Update();
 
-        glBufferData(GL_SHADER_STORAGE_BUFFER, 
-            Boid.boids.size() * sizeof(Boid.boids[0]), 
-            Boid.boids.data(), 
-            GL_STATIC_DRAW
-        );
+        glBufferData(GL_SHADER_STORAGE_BUFFER,
+                     Boid.boids.size() * sizeof(Boid.boids[0]),
+                     Boid.boids.data(),
+                     GL_STATIC_DRAW);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, Boid_Position);
 
         SetShaderValue(FragShad, ResolutionLoc, res, SHADER_UNIFORM_IVEC2);
@@ -73,7 +72,7 @@ int main(void)
     return 0;
 }
 
-
-void Update(){
-        ForceCalculation(&Boid);
+void Update()
+{
+    ForceCalculation(&Boid);
 }

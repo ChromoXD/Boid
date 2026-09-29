@@ -31,9 +31,10 @@ void main(){
         float x = fragTexCoord.x - Particle_Array[i].Position[0];
         float y = fragTexCoord.y - Particle_Array[i].Position[1];
 
-        if(( x*x + y*y < radius*radius) || 
+        if(( x*x + y*y < radius*radius) ||
             (x*x + y*y < (Particle_Array[i].Vision_Radius*Particle_Array[i].Vision_Radius + 0.00001) && 
-             x*x + y*y > (Particle_Array[i].Vision_Radius*Particle_Array[i].Vision_Radius - 0.00001))){
+            x*x + y*y > (Particle_Array[i].Vision_Radius*Particle_Array[i].Vision_Radius - 0.00001))
+        ){
             FragColor = vec4(1.0, 1.0, 1.0, 1.0);
             break;
         }

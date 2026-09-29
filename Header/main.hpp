@@ -1,9 +1,8 @@
 #pragma once
 #include <raylib.h>
-#include <vector>
-#include <array>
+#include <bits/stdc++.h>
 
-const int screenWidth = 800;
+const int screenWidth = 1200;
 const int screenHeight = 800;
 
 
