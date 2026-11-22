@@ -21,8 +21,8 @@ To create a flock-like behaviour
 ---
 
 ## How to control the player:
- Use the left and right arrow keys to change its direction
- And use the up and down arrow keys to increase or decrease its speed
+ - Use the left and right arrow keys to change its direction
+ - And use the up and down arrow keys to increase or decrease its speed
 
 ---
 
