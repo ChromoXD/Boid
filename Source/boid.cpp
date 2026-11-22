@@ -17,7 +17,7 @@ void BoidParticleClass::InitBoidParticle(int size)
     boids.clear();
     for (int i = 0; i < size; i++)
         boids.push_back({
-            0.25f,
+            0.08f,
             GetRandomValue(300, 800) / 100000.0f,
             GetRandomValue(0, 359) / 360.0f,
             { GetRandomValue(0, 10000) / 10000.0f * aspect,
@@ -100,8 +100,8 @@ void ForceCalculation(BoidParticleClass *B)
             fx += sepW * sx + aliW * (ax / cnt);
             fy += sepW * sy + aliW * (ay / cnt);
 
-            fx += cohW * (cx / cnt - bs[i].Position[0]/r);
-            fy += cohW * (cy / cnt - bs[i].Position[1]/r);
+            fx += cohW * (cx / cnt - bs[i].Position[0]);
+            fy += cohW * (cy / cnt - bs[i].Position[1]);
         }
 
         float nx = hx + turn * fx;

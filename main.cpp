@@ -7,7 +7,7 @@
 #include <cmath>
 #include <ctime>
 
-BoidParticleClass Boid(30);
+BoidParticleClass Boid(100);
 Game game(24);
 
 void Update();
