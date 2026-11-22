@@ -1,6 +1,4 @@
-#include <iostream>
 #include <bits/stdc++.h>
-#include <ctime>
 #include <cmath>
 #include <random>
 #include "Header/boid.hpp"
@@ -24,12 +22,6 @@ void BoidParticleClass::InitBoidParticle(int size)
               GetRandomValue(0, 10000) / 10000.0f }
         });
 }
-
-void BoidParticleClass::AddForce(int index, float angle, float Newton, float repulsive_Force, float repulsive_Force_Angle, float Stearing_Angle)
-{
-
-}
-
 
 void ForceCalculation(BoidParticleClass *B)
 {

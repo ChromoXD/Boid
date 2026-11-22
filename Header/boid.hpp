@@ -22,10 +22,6 @@ class BoidParticleClass{
         }
     
     void InitBoidParticle(int NOP);
-
-    // void AddForce(int index, float angle, float Newton);
-    void AddForce(int index, float angle, float Newton, float repulsive_Force, float repulsive_Force_Angle, float Stearing_Angle);
-
 };
 
 void ForceCalculation(BoidParticleClass * Boid);

@@ -34,7 +34,7 @@ void main(){
 
         if(i == Number-1){
             if(x*x + y*y < (radius + 0.005)*(radius + 0.002)){
-                FragColor = vec4(0.416, 0.69, 0.686, 1.0);
+                FragColor = vec4(1.0, 0.443, 0.443, 1.0);
                 break;
             }
         }

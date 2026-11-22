@@ -1,12 +1,8 @@
-#include <iostream>
 #include <bits/stdc++.h>
 #include "Header/main.hpp"
 #include "Header/boid.hpp"
 #include "raylib.h"
 #include <glad.h>
-#include <cmath>
-#include <ctime>
-
 BoidParticleClass Boid(100);
 Game game(24);
 
@@ -15,8 +11,15 @@ void Update();
 int main(void)
 {
     InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "Boidz");
+    
+    ChangeDirectory(GetApplicationDirectory());
+    TraceLog(LOG_WARNING, "cwd: %s", GetWorkingDirectory());
+    TraceLog(LOG_WARNING, "shader file exists: %d", FileExists("Shader/Frag.glsl"));
 
-    Shader FragShad{LoadShader(0, "Shader/Frag.glsl")};
+    Shader FragShad = LoadShader(0, "Shader/Frag.glsl");
+    TraceLog(LOG_WARNING, "shader id: %u (default id is 3 or so)", FragShad.id);
+    TraceLog(LOG_WARNING, "GL: %s", glGetString(GL_VERSION));
+
     RenderTexture2D Screen{LoadRenderTexture(static_cast<int>(screenWidth), static_cast<int>(screenHeight))};
 
     GLuint Boid_Position;

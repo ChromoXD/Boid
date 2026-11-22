@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build project (raylib)",
+            "command": "C:/msys64/mingw64/bin/g++.exe",
+            "args": ["-fdiagnostics-color=always",
+                    "-g",
+                    "-O2","-static", "-static-libgcc", "-static-libstdc++",
+                    "-std=c++17",
+                    "${file}",
+                    "${fileDirname}\\Source\\boid.cpp",
+
+                    "-I", "C:/raylib/raylib/src",
+                    "-I", "${fileDirname}",
+
+                    "-L", "C:/raylib/raylib/build/raylib",
+
+                    "-o", "${fileDirname}\\${fileBasenameNoExtension}.exe",
+
+                    "-lraylib",
+                    "-lopengl32",
+                    "-lgdi32",
+                    "-lwinmm"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Builds main.cpp + boid.cpp with raylib."
+        }
+    ]
+}
