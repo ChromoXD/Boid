@@ -12,13 +12,13 @@ To create a flock-like behaviour
 ## Tech-Stack
  - Cpp
  - Shader(Fragment, for rendering) 
----
+
 
 ## Future Plans
  - Polishing their movement
  - Improving the player's motion
  - Adding an editable UI
----
+
 
 ## How to control the player:
  - Use the left and right arrow keys to change its direction
