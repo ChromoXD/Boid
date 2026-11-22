@@ -2,8 +2,8 @@
 #include <raylib.h>
 #include <bits/stdc++.h>
 
-const int screenWidth = 1200;
-const int screenHeight = 800;
+const float screenWidth = 1200;
+const float screenHeight = 800;
 
 
 struct Boid_Particles{

@@ -7,17 +7,17 @@
 #include <cmath>
 #include <ctime>
 
-BoidParticleClass Boid(50);
+BoidParticleClass Boid(30);
 Game game(24);
 
 void Update();
 
 int main(void)
 {
-    InitWindow(screenWidth, screenHeight, "Boidz");
+    InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "Boidz");
 
     Shader FragShad{LoadShader(0, "Shader/Frag.glsl")};
-    RenderTexture2D Screen{LoadRenderTexture(screenWidth, screenHeight)};
+    RenderTexture2D Screen{LoadRenderTexture(static_cast<int>(screenWidth), static_cast<int>(screenHeight))};
 
     GLuint Boid_Position;
     glGenBuffers(1, &Boid_Position);
@@ -38,9 +38,10 @@ int main(void)
 
     int ResolutionLoc{GetShaderLocation(FragShad, "u_resolution")},
         NumberLoc{GetShaderLocation(FragShad, "Number")},
-        res[2]{screenWidth, screenHeight},
         NOP{Boid.GetNumberOfParticles()};
-
+        
+    float res[2]{screenWidth, screenHeight};
+        
     while (!WindowShouldClose())
     {
         Update();
@@ -51,7 +52,7 @@ int main(void)
                      GL_STATIC_DRAW);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, Boid_Position);
 
-        SetShaderValue(FragShad, ResolutionLoc, res, SHADER_UNIFORM_IVEC2);
+        SetShaderValue(FragShad, ResolutionLoc, res, SHADER_UNIFORM_VEC2);
         SetShaderValue(FragShad, NumberLoc, &NOP, SHADER_UNIFORM_INT);
 
         BeginTextureMode(Screen);
@@ -76,3 +77,5 @@ void Update()
 {
     ForceCalculation(&Boid);
 }
+
+
