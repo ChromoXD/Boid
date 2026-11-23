@@ -29,7 +29,9 @@ void ForceCalculation(BoidParticleClass *B)
     const int n = bs.size();
     std::vector<float> newDir(n);
 
-    const float sepW = 1.0f, aliW = 1.0f, cohW = 0.5f;
+    const float seperation_W = 1.0f;
+    const float Alignment_W = 1.0f;
+    const float cohision_W = 0.5f;
     const float turn = 0.1f;
 
     for (int i = 0; i < n; i++)
@@ -49,14 +51,14 @@ void ForceCalculation(BoidParticleClass *B)
         float th = bs[i].Direction * 2*PI;
         float hx = cosf(th), hy = sinf(th);
 
-        float sx = 0, sy = 0;
-        float ax = 0, ay = 0;
-        float cx = 0, cy = 0;
+        float s[2]{0,0};
+        float a[2]{0,0};
+        float c[2]{0,0};
         
         int cnt = 0;
-        float r  = bs[i].Vision_Radius;
+        float r = bs[i].Vision_Radius;
         
-        float sepR = 0.3f * r;
+        float seperation_R = 0.3f * r;
         
         for (int j = 0; j < n; j++)
         {
@@ -67,37 +69,37 @@ void ForceCalculation(BoidParticleClass *B)
             if (d2 > r*r || d2 < 1e-12f) continue;
 
             float d = sqrtf(d2);
-            sx += (dx / d) * (1.0f - d / r);
-            sy += (dy / d) * (1.0f - d / r);
+            s[0] += (dx / d) * (1.0f - d / r);
+            s[1] += (dy / d) * (1.0f - d / r);
 
 
-            if (d < sepR)
+            if (d < seperation_R)
             {
-                float k = 1.0f - d / sepR;
-                sx += (dx / d) * k * k;
-                sy += (dy / d) * k * k;
+                float k = 1.0f - d / seperation_R;
+                s[0] += (dx / d) * k * k;
+                s[1] += (dy / d) * k * k;
             }
 
-
             float tj = bs[j].Direction * 2*PI;
-            ax += cosf(tj);  
-            ay += sinf(tj);
-            cx += bs[j].Position[0];  cy += bs[j].Position[1];
+            a[0] += cosf(tj);  
+            a[1] += sinf(tj);
+            c[0] += bs[j].Position[0];  
+            c[1] += bs[j].Position[1];
             cnt++;
         }
 
-        float fx = 0, fy = 0;
+        float f[2]{0,0};
         if (cnt > 0)
         {
-            fx += sepW * sx + aliW * (ax / cnt);
-            fy += sepW * sy + aliW * (ay / cnt);
+            f[0] += seperation_W * s[0] + Alignment_W * (a[0] / cnt);
+            f[1] += seperation_W * s[1] + Alignment_W * (a[1] / cnt);
 
-            fx += cohW * (cx / cnt - bs[i].Position[0]);
-            fy += cohW * (cy / cnt - bs[i].Position[1]);
+            f[0] += cohision_W * (c[0] / cnt - bs[i].Position[0]);
+            f[1] += cohision_W * (c[1] / cnt - bs[i].Position[1]);
         }
 
-        float nx = hx + turn * fx;
-        float ny = hy + turn * fy;
+        float nx = hx + turn * f[0];
+        float ny = hy + turn * f[1];
         newDir[i] = atan2f(ny, nx) / (2*PI);
         if (newDir[i] < 0) newDir[i] += 1.0f;
     }
